@@ -75,6 +75,7 @@ module.exports = (router) => {
         s.stationType,
         s.distanceToArrival,
         s.maxLandingPadSize,
+        s.carrierDockingAccess,
         s.bodyId,
         s.bodyName,
         c.systemName,
@@ -92,7 +93,7 @@ module.exports = (router) => {
         c.statusFlags,
         c.updatedAt
           ${systemName ? ', ROUND(SQRT(POWER(c.systemX-@systemX,2)+POWER(c.systemY-@systemY,2)+POWER(c.systemZ-@systemZ,2))) AS distance' : ''}
-        FROM trade.commodities c 
+        FROM trade.commodities c
           LEFT JOIN stations.stations s ON c.marketId = s.marketId
         WHERE c.commodityName = @commodityName COLLATE NOCASE
           ${filters.join(' ')}
@@ -150,6 +151,7 @@ module.exports = (router) => {
         s.stationType,
         s.distanceToArrival,
         s.maxLandingPadSize,
+        s.carrierDockingAccess,
         s.bodyId,
         s.bodyName,
         c.systemName,
@@ -167,7 +169,7 @@ module.exports = (router) => {
         c.statusFlags,
         c.updatedAt
           ${systemName ? ', ROUND(SQRT(POWER(c.systemX-@systemX,2)+POWER(c.systemY-@systemY,2)+POWER(c.systemZ-@systemZ,2))) AS distance' : ''}
-        FROM trade.commodities c 
+        FROM trade.commodities c
           LEFT JOIN stations.stations s ON c.marketId = s.marketId
         WHERE c.commodityName = @commodityName COLLATE NOCASE
           ${filters.join(' ')}
